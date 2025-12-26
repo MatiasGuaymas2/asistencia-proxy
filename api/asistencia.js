@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   const appsScriptURL =
-    "https://script.google.com/macros/s/AKfycby2ruZ1IymzcvLmF_Q_qc73cUkIVnmd1WBr9LLvXccLZ-BZA-WbXoKkwY7zlKMrreO4/exec";
+    "https://script.google.com/macros/s/AKfycbzf-yCup_dCwoR8vA6a2gek3HXgTcRI4hNCGvlQA36k_hZu-rvZ95rZaERKnKXuSxxO/exec";
 
   const url = `${appsScriptURL}?materia=${encodeURIComponent(materia)}&token=${encodeURIComponent(token)}&dni=${encodeURIComponent(dni)}`;
 
