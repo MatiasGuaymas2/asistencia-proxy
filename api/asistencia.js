@@ -1,5 +1,4 @@
-import fetch from "node-fetch";
-
+// No hace falta importar node-fetch
 export default async function handler(req, res) {
   const { materia, token, dni } = req.query;
 
@@ -14,10 +13,12 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(url);
-    const text = await response.text();
+    let text = await response.text();
 
-    // Aquí solo devolvemos el mensaje, nada de HTML completo
-    // Puedes ajustar según tu Apps Script, si devuelve un string simple ya está
+    // Elimina cualquier /u/1/ que Google pueda agregar
+    text = text.replace(/\/u\/\d+\//g, '/');
+
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.status(200).send(text);
   } catch (err) {
     console.error(err);
