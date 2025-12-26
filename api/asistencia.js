@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 export default async function handler(req, res) {
   const { materia, token } = req.query;
 
@@ -9,20 +7,19 @@ export default async function handler(req, res) {
 
   // URL de tu Web App de Google Apps Script
   const appsScriptURL =
-    "https://script.google.com/macros/s/AKfycby2ruZ1IymzcvLmF_Q_qc73cUkIVnmd1WBr9LLvXccLZ-BZA-WbXoKkwY7zlKMrreO4/exec";
+    "https://script.google.com/macros/s/AKfycbzf-yCup_dCwoR8vA6a2gek3HXgTcRI4hNCGvlQA36k_hZu-rvZ95rZaERKnKXuSxxO/exec";
 
   const url = `${appsScriptURL}?materia=${encodeURIComponent(
     materia
   )}&token=${encodeURIComponent(token)}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url); // usar fetch global
     let html = await response.text();
 
-    // 🔥 Solución: eliminar cualquier /u/X/ que Google agregue
+    // 🔥 Limpiar cualquier /u/X/ que Google agregue
     html = html.replace(/\/u\/\d+\//g, '/');
 
-    // Devolver HTML limpio al navegador
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.status(200).send(html);
   } catch (err) {
